@@ -79,7 +79,7 @@ module lpc_decode(
 	//lpc decode inouts
 
 );
-	reg [15:0]port_reg;
+	reg [31:0]port_reg;
 always @(posedge lclk) begin
     //Decode the data
     case(port_reg[3:0])
@@ -149,16 +149,16 @@ end
 	reg [31:0] address_reg;
 	reg [4:0] state_lpc;
 	reg [3:0] start_reg;
-//	reg [7:0] lad_out_mux;
+	reg [7:0] lad_out_mux;
 	reg [3:0]  lad_in;
 	reg [3:0]  lad_out;
 	
-//	wire memr = 1'b0;
+	wire memr = 1'b0;
    wire iow = ~cmd_reg[2] & ~cmd_reg[1] & cmd_reg[0];
 	wire lad_oe = lad_oe_reg & lframe;
 	wire iow_hit = (address_reg[31:20] == 12'h008);
 	assign lad = lad_oe ? lad_out : 4'hz;
-//	wire memr_hit = 1'b0;
+	wire memr_hit = 1'b0;
 	
 	always @(lframe,lrst,lad)
 	begin
@@ -198,7 +198,7 @@ end
 		   cmd_reg <=  3'b000;
 	      lad_out <=  4'h0;
 	      lad_oe_reg <=  1'b0;
-	      port_reg <=  16'h0000;  
+	      port_reg <=  32'h0000;  
    	end
   	 	else 
 		begin
@@ -338,17 +338,17 @@ end
 					begin
   		          	state_lpc <= abort;
 	  	        	end
-	    /*     	else if (memr) 
+	         	else if (memr) 
 					begin
 		         	state_lpc <= memr_pre_tar0;
-	  	        	end	*/
+	  	        	end	
 	          	else 
 					begin
 		         	state_lpc <= idle;
 		        	end
   	      	end
 	      
-		/*		memr_pre_tar0: 
+				memr_pre_tar0: 
 				begin
 	  	       	if (~lframe) 
 					begin
@@ -405,7 +405,7 @@ end
          	   	state_lpc <=  post_tar0;
           		end
         		end
-	    */  
+	      
 				iow_data0: 
 				begin
 	   	   	if (~lframe) 
@@ -416,9 +416,9 @@ end
 					begin
 	      	    	case (address_reg[19:16])
 	              		4'h0: port_reg[3:0] <= lad_in;
-						4'h1: port_reg[11:8] <= lad_in;
-      	    //  	  	4'h2: port_reg[19:16] <= lad_in;
-         	 //    		4'h3: port_reg[27:24] <= lad_in;
+			4'h1: port_reg[11:8] <= lad_in;
+      	      	  	4'h2: port_reg[19:16] <= lad_in;
+         	     		4'h3: port_reg[27:24] <= lad_in;
    	         	endcase
 	            	state_lpc <= iow_data1;
     	      	end
@@ -439,8 +439,8 @@ end
 	      	    	case (address_reg[19:16])
 						4'h0: port_reg[7:4]   <= lad_in;
 						4'h1: port_reg[15:12] <= lad_in;
-            	//	  	4'h2: port_reg[23:20] <= lad_in;
-				//		4'h3: port_reg[31:28] <= lad_in;
+            		  	4'h2: port_reg[23:20] <= lad_in;
+						4'h3: port_reg[31:28] <= lad_in;
 	 	           	endcase
  		           	state_lpc <= iow_pre_tar0;
       	    	end
