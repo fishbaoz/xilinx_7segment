@@ -65,7 +65,7 @@ module lpc_decode(
 	input lframe,
 	inout [3:0] lad,
 	//lpc decode outputs
-	output reg [31:0]port_reg
+	output reg [15:0]port_reg
 //  input IntClk,
 
 //  output reg [6:0] LedSeg_2,
@@ -185,16 +185,16 @@ end
 	reg [31:0] address_reg;
 	reg [4:0] state_lpc;
 	reg [3:0] start_reg;
-	reg [7:0] lad_out_mux;
+//	reg [7:0] lad_out_mux;
 	reg [3:0]  lad_in;
 	reg [3:0]  lad_out;
 	
-	wire memr = 1'b0;
+//	wire memr = 1'b0;
    wire iow = ~cmd_reg[2] & ~cmd_reg[1] & cmd_reg[0];
 	wire lad_oe = lad_oe_reg & lframe;
 	wire iow_hit = (address_reg[31:20] == 12'h008);
 	assign lad = lad_oe ? lad_out : 4'hz;
-	wire memr_hit = 1'b0;
+//	wire memr_hit = 1'b0;
 	
 	always @(lframe,lrst,lad)
 	begin
@@ -211,10 +211,10 @@ end
 	parameter [4:0] addr2 = 5'h07;
 	parameter [4:0] addr1 = 5'h08;
 	parameter [4:0] addr0 = 5'h09;
-	parameter [4:0] memr_pre_tar0 = 5'h0A;
-	parameter [4:0] memr_sync0 = 5'h0B;
-	parameter [4:0] memr_data0 = 5'h0C;
-	parameter [4:0] memr_data1 = 5'h0D;
+//	parameter [4:0] memr_pre_tar0 = 5'h0A;
+//	parameter [4:0] memr_sync0 = 5'h0B;
+//	parameter [4:0] memr_data0 = 5'h0C;
+//	parameter [4:0] memr_data1 = 5'h0D;
 	parameter [4:0] iow_pre_tar0 = 5'h0E;
 	parameter [4:0] iow_pre_tar1 = 5'h15;
 	parameter [4:0] iow_sync0 = 5'h0F;
@@ -234,7 +234,7 @@ end
 		   cmd_reg <=  3'b000;
 	      lad_out <=  4'h0;
 	      lad_oe_reg <=  1'b0;
-	      port_reg <=  32'h0000;  
+	      port_reg <=  16'h0000;  
    	end
   	 	else 
 		begin
@@ -374,73 +374,73 @@ end
 					begin
   		          	state_lpc <= abort;
 	  	        	end
-	         	else if (memr) 
-					begin
-		         	state_lpc <= memr_pre_tar0;
-	  	        	end	
+//	         	else if (memr) 
+//					begin
+//		         	state_lpc <= memr_pre_tar0;
+//	  	        	end	
 	          	else 
 					begin
 		         	state_lpc <= idle;
 		        	end
   	      	end
 	      
-				memr_pre_tar0: 
-				begin
-	  	       	if (~lframe) 
-					begin
-		         	state_lpc <= abort;
-  		        	end
- 	         	else if (memr_hit)
-					begin
-  		          	state_lpc <= memr_sync0;
-   	       	end
-      	    	else
-					begin
-	       		  	state_lpc <= idle;
-		        	end
-				end
+//				memr_pre_tar0: 
+//				begin
+//	  	       	if (~lframe) 
+//					begin
+//		         	state_lpc <= abort;
+// 		        	end
+// 	         	else if (memr_hit)
+//					begin
+//  		          	state_lpc <= memr_sync0;
+//   	       	end
+ //     	    	else
+//					begin
+//	       		  	state_lpc <= idle;
+//		        	end
+//				end
         
-			  	memr_sync0: 
-				begin
-      	    	lad_oe_reg <= 1'b1;
-         	 	lad_out <= 4'h0;
-          		if (~lframe) 
-					begin
-		         	state_lpc <=  abort;
-  		        	end
-  		        	else
-					begin
-   	         	state_lpc <=  memr_data0;
-      	    	end
-      	  	end
+//			  	memr_sync0: 
+//				begin
+//      	    	lad_oe_reg <= 1'b1;
+//         	 	lad_out <= 4'h0;
+//          		if (~lframe)
+//					begin
+//		         	state_lpc <=  abort;
+//  		        	end
+//  		        	else
+//					begin
+//   	         	state_lpc <=  memr_data0;
+//      	    	end
+//      	  	end
         
-			  	memr_data0: 
-				begin
-  		       	lad_out <= lad_out_mux[3:0];
+//			  	memr_data0: 
+//				begin
+//  		       	lad_out <= lad_out_mux[3:0];
+//
+//					if (~lframe) 
+//					begin
+//		          	state_lpc <= abort;
+//   	       	end
+//      	    	else
+//					begin
+//	            	state_lpc <=  memr_data1;
+//   	       	end
+//      	  	end
 
-					if (~lframe) 
-					begin
-		          	state_lpc <= abort;
-   	       	end
-      	    	else
-					begin
-	            	state_lpc <=  memr_data1;
-   	       	end
-      	  	end
+// 	       	memr_data1: 
+//				begin
+//	          	lad_out <= lad_out_mux[7:4];
 
- 	       	memr_data1: 
-				begin
-	          	lad_out <= lad_out_mux[7:4];
-
-  		        	if (~lframe) 
-					begin
-	   	       	state_lpc <= abort;
-      	    	end
-         	 	else 
-					begin
-         	   	state_lpc <=  post_tar0;
-          		end
-        		end
+//  		        	if (~lframe) 
+//					begin
+//	   	       	state_lpc <= abort;
+//      	    	end
+//         	 	else 
+//					begin
+//         	   	state_lpc <=  post_tar0;
+//          		end
+//        		end
 	      
 				iow_data0: 
 				begin
@@ -452,9 +452,9 @@ end
 					begin
 	      	    	case (address_reg[19:16])
 	              		4'h0: port_reg[3:0] <= lad_in;
-			4'h1: port_reg[11:8] <= lad_in;
-      	      	  	4'h2: port_reg[19:16] <= lad_in;
-         	     		4'h3: port_reg[27:24] <= lad_in;
+							default: port_reg[11:8] <= lad_in; //4'h1:
+      	      	  //	4'h2: port_reg[19:16] <= lad_in;
+         	     		//4'h3: port_reg[27:24] <= lad_in;
    	         	endcase
 	            	state_lpc <= iow_data1;
     	      	end
@@ -474,9 +474,9 @@ end
 					begin
 	      	    	case (address_reg[19:16])
 						4'h0: port_reg[7:4]   <= lad_in;
-						4'h1: port_reg[15:12] <= lad_in;
-            		  	4'h2: port_reg[23:20] <= lad_in;
-						4'h3: port_reg[31:28] <= lad_in;
+						default: port_reg[15:12] <= lad_in; //4'h1:
+            	//	  	4'h2: port_reg[23:20] <= lad_in;
+					//	4'h3: port_reg[31:28] <= lad_in;
 	 	           	endcase
  		           	state_lpc <= iow_pre_tar0;
       	    	end
