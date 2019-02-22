@@ -72,15 +72,15 @@ module leds_7seg_controller (
 //	output reg debug,
   // Int Bus Inputs
   input IntClk,
-  input Reset,
+//  input Reset,
 
-  input [31:0]  data,	
+  input [15:0]  data,	
   
   // LED Outputs
   output reg [6:0] LedSeg_1,
-  output reg [6:0] LedSeg_2,
-  output reg [6:0] LedSeg_3,
-  output reg [6:0] LedSeg_4
+  output reg [6:0] LedSeg_2
+//  output reg [6:0] LedSeg_3,
+//  output reg [6:0] LedSeg_4
 //  output	  LedSeg_DP_1,
 //  output	  LedSeg_DP_2,
 //  output	  LedSeg_DP_3,
@@ -163,28 +163,48 @@ module leds_7seg_controller (
 	end // always
 */
 //   assign LedSeg_DP_1 = data[5];
-//*
+
 always @(posedge IntClk) begin
     //Decode the data
     case(data[3:0])
-		5'h0: LedSeg_1 = 7'b0111111;
-		5'h1: LedSeg_1 = 7'b0000110;
-		5'h2: LedSeg_1 = 7'b1011011;
-		5'h3: LedSeg_1 = 7'b1001111;
-		5'h4: LedSeg_1 = 7'b1100110;
-		5'h5: LedSeg_1 = 7'b1101101;
-		5'h6: LedSeg_1 = 7'b1111101;
-		5'h7: LedSeg_1 = 7'b0000111;
-		5'h8: LedSeg_1 = 7'b1111111;
-		5'h9: LedSeg_1 = 7'b1101111;
-		5'hA: LedSeg_1 = 7'b1110111;
-		5'hB: LedSeg_1 = 7'b1111100;
-		5'hC: LedSeg_1 = 7'b0111001;
-		5'hD: LedSeg_1 = 7'b1011110;
-		5'hE: LedSeg_1 = 7'b1111001;
-		5'hF: LedSeg_1 = 7'b1110001;
+		5'h0: LedSeg_1 = ~7'b0111111;
+		5'h1: LedSeg_1 = ~7'b0000110;
+		5'h2: LedSeg_1 = ~7'b1011011;
+		5'h3: LedSeg_1 = ~7'b1001111;
+		5'h4: LedSeg_1 = ~7'b1100110;
+		5'h5: LedSeg_1 = ~7'b1101101;
+		5'h6: LedSeg_1 = ~7'b1111101;
+		5'h7: LedSeg_1 = ~7'b0000111;
+		5'h8: LedSeg_1 = ~7'b1111111;
+		5'h9: LedSeg_1 = ~7'b1101111;
+		5'hA: LedSeg_1 = ~7'b1110111;
+		5'hB: LedSeg_1 = ~7'b1111100;
+		5'hC: LedSeg_1 = ~7'b0111001;
+		5'hD: LedSeg_1 = ~7'b1011110;
+		5'hE: LedSeg_1 = ~7'b1111001;
+		5'hF: LedSeg_1 = ~7'b1110001;
     endcase
 end
-//*/
+always @(posedge IntClk) begin
+    //Decode the data
+    case(data[7:4])
+		5'h0: LedSeg_2 = ~7'b0111111;
+		5'h1: LedSeg_2 = ~7'b0000110;
+		5'h2: LedSeg_2 = ~7'b1011011;
+		5'h3: LedSeg_2 = ~7'b1001111;
+		5'h4: LedSeg_2 = ~7'b1100110;
+		5'h5: LedSeg_2 = ~7'b1101101;
+		5'h6: LedSeg_2 = ~7'b1111101;
+		5'h7: LedSeg_2 = ~7'b0000111;
+		5'h8: LedSeg_2 = ~7'b1111111;
+		5'h9: LedSeg_2 = ~7'b1101111;
+		5'hA: LedSeg_2 = ~7'b1110111;
+		5'hB: LedSeg_2 = ~7'b1111100;
+		5'hC: LedSeg_2 = ~7'b0111001;
+		5'hD: LedSeg_2 = ~7'b1011110;
+		5'hE: LedSeg_2 = ~7'b1111001;
+		5'hF: LedSeg_2 = ~7'b1110001;
+    endcase
+end
     
 endmodule

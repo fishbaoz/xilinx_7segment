@@ -65,12 +65,12 @@ module lpc_decode(
 	input lframe,
 	inout [3:0] lad,
 	//lpc decode outputs
-	output reg [31:0]port_reg,
+	output reg [31:0]port_reg
 //  input IntClk,
 
 //  output reg [6:0] LedSeg_2,
-  output reg [6:0] LedSeg_3,
-  output reg [6:0] LedSeg_4
+//  output reg [6:0] LedSeg_3,
+//  output reg [6:0] LedSeg_4
 // output	  LedSeg_DP_1,
 // output	  LedSeg_DP_2,
 // output	  LedSeg_DP_3,
@@ -129,6 +129,7 @@ always @(posedge lclk) begin
 		endcase
 end
 */	
+/*
 	always @(posedge lclk) begin
     //Decode the data
     case(port_reg[11:8])
@@ -177,7 +178,7 @@ end
 
 		endcase
 end
-
+*/
 	//reg [31:0] port_reg;
 	reg [2:0] cmd_reg;
 	reg lad_oe_reg;
