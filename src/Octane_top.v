@@ -515,9 +515,9 @@ SP4_power_sequencer SP4_power_sequencer_inst(
 /*
 leds_7seg_controller leds_7seg_controller_inst(
 //  .debug			(),
-  .IntClk		(FPGA_24M_CLK),
+  .IntClk		(FPGA_LPC_CLK),
   .Reset			(1'b0),//(Reset),
-  .data			({4'h0,lpc_port_reg[15:12], 4'h0,lpc_port_reg[11:8], 4'h0,lpc_port_reg[7:4], 4'h0,lpc_port_reg[3:0]}),//(led_bus_4char),
+  .data			({lpc_port_reg[15:12], lpc_port_reg[11:8], lpc_port_reg[7:4], lpc_port_reg[3:0]}),//(led_bus_4char),
   // LED Outputs
   .LedSeg_1		(LED_SEG_1),
   .LedSeg_2		(LED_SEG_2),
@@ -544,15 +544,15 @@ lpc_decode lpc_decode_inst(
 //	.port_reg (lpc_port_reg) ,
 //	.IntClk			(FPGA_24M_CLK),
 	
-	.LedSeg_2		(LED_SEG_2),
-//	.LedSeg_3		(LED_SEG_3),
-//	.LedSeg_4		(LED_SEG_4)  
+//	.LedSeg_2		(LED_SEG_2),
+	.LedSeg_3		(LED_SEG_3),
+	.LedSeg_4		(LED_SEG_4)
 //	.LedSeg_DP_1	(LED_DP_1),
 //	.LedSeg_DP_2	(LED_DP_2),
 //	.LedSeg_DP_3	(LED_DP_3),
 //	.LedSeg_DP_4	(LED_DP_4),  
 
-	.LedSeg_1		(LED_SEG_1)	 
+//	.LedSeg_1		(LED_SEG_1)	 
 	//lpc decode inouts
 
 );

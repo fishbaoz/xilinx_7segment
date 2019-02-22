@@ -65,22 +65,21 @@ module lpc_decode(
 	input lframe,
 	inout [3:0] lad,
 	//lpc decode outputs
-	output reg [31:0]port_reg,
+//	output reg [15:0]port_reg,
 //  input IntClk,
 
-//  output reg [6:0] LedSeg_2,
-  output reg [6:0] LedSeg_3,
-  output reg [6:0] LedSeg_4
+  output reg [6:0] LedSeg_2,
+//  output reg [6:0] LedSeg_3,
+//  output reg [6:0] LedSeg_4,
 // output	  LedSeg_DP_1,
 // output	  LedSeg_DP_2,
 // output	  LedSeg_DP_3,
-// output	  LedSeg_DP_4
-//  output reg [6:0] LedSeg_1
+// output	  LedSeg_DP_4,
+  output reg [6:0] LedSeg_1
 	//lpc decode inouts
 
 );
-//	reg [31:0]port_reg;
-/*
+	reg [31:0]port_reg;
 always @(posedge lclk) begin
     //Decode the data
     case(port_reg[3:0])
@@ -125,59 +124,25 @@ always @(posedge lclk) begin
 		5'hE: LedSeg_2 = ~7'b1111001;
 		5'hF: LedSeg_2 = ~7'b1110001;
 //		default: LedSeg_2 = 7'b0000000;
-
+/*
+		//Special characters
+		5'h10: LedSeg_2 = 7'b0000000;// ' ' blank
+		5'h11: LedSeg_2 = 7'b1110100;// 'h'
+		5'h12: LedSeg_2 = 7'b1110110;// 'H'
+		5'h13: LedSeg_2 = 7'b0111000;// 'L'
+		5'h14: LedSeg_2 = 7'b1110011;// 'P'
+		5'h15: LedSeg_2 = 7'b1111000;// 't'
+		5'h16: LedSeg_2 = 7'b0011100;// 'u'
+		5'h17: LedSeg_2 = 7'b1101110;// 'y'
+		5'h18: LedSeg_2 = 7'b1110000;// 'r'
+		5'h19: LedSeg_2 = 7'b1000000;// '-'
+		5'h1A: LedSeg_2 = 7'b0111110;// 'U'	
+*/
 		endcase
 end
-*/	
-	always @(posedge lclk) begin
-    //Decode the data
-    case(port_reg[11:8])
-
-		5'h0: LedSeg_3 = ~7'b0111111;
-		5'h1: LedSeg_3 = ~7'b0000110;
-		5'h2: LedSeg_3 = ~7'b1011011;
-		5'h3: LedSeg_3 = ~7'b1001111;
-		5'h4: LedSeg_3 = ~7'b1100110;
-		5'h5: LedSeg_3 = ~7'b1101101;
-		5'h6: LedSeg_3 = ~7'b1111101;
-		5'h7: LedSeg_3 = ~7'b0000111;
-		5'h8: LedSeg_3 = ~7'b1111111;
-		5'h9: LedSeg_3 = ~7'b1101111;
-		5'hA: LedSeg_3 = ~7'b1110111;
-		5'hB: LedSeg_3 = ~7'b1111100;
-		5'hC: LedSeg_3 = ~7'b0111001;
-		5'hD: LedSeg_3 = ~7'b1011110;
-		5'hE: LedSeg_3 = ~7'b1111001;
-		5'hF: LedSeg_3 = ~7'b1110001;
-//		default: LedSeg_2 = 7'b0000000;
-
-		endcase
-end
-		always @(posedge lclk) begin
-    //Decode the data
-    case(port_reg[15:12])
-
-		5'h0: LedSeg_4 = ~7'b0111111;
-		5'h1: LedSeg_4 = ~7'b0000110;
-		5'h2: LedSeg_4 = ~7'b1011011;
-		5'h3: LedSeg_4 = ~7'b1001111;
-		5'h4: LedSeg_4 = ~7'b1100110;
-		5'h5: LedSeg_4 = ~7'b1101101;
-		5'h6: LedSeg_4 = ~7'b1111101;
-		5'h7: LedSeg_4 = ~7'b0000111;
-		5'h8: LedSeg_4 = ~7'b1111111;
-		5'h9: LedSeg_4 = ~7'b1101111;
-		5'hA: LedSeg_4 = ~7'b1110111;
-		5'hB: LedSeg_4 = ~7'b1111100;
-		5'hC: LedSeg_4 = ~7'b0111001;
-		5'hD: LedSeg_4 = ~7'b1011110;
-		5'hE: LedSeg_4 = ~7'b1111001;
-		5'hF: LedSeg_4 = ~7'b1110001;
-//		default: LedSeg_2 = 7'b0000000;
-
-		endcase
-end
-
+	
+	
+	
 	//reg [31:0] port_reg;
 	reg [2:0] cmd_reg;
 	reg lad_oe_reg;
