@@ -83,58 +83,47 @@ module lpc_decode(
 always @(posedge lclk) begin
     //Decode the data
     case(port_reg[3:0])
-		5'h0: LedSeg_1 = 7'b0111111;
-		5'h1: LedSeg_1 = 7'b0000110;
-		5'h2: LedSeg_1 = 7'b1011011;
-		5'h3: LedSeg_1 = 7'b1001111;
-		5'h4: LedSeg_1 = 7'b1100110;
-		5'h5: LedSeg_1 = 7'b1101101;
-		5'h6: LedSeg_1 = 7'b1111101;
-		5'h7: LedSeg_1 = 7'b0000111;
-		5'h8: LedSeg_1 = 7'b1111111;
-		5'h9: LedSeg_1 = 7'b1101111;
-		5'hA: LedSeg_1 = 7'b1110111;
-		5'hB: LedSeg_1 = 7'b1111100;
-		5'hC: LedSeg_1 = 7'b0111001;
-		5'hD: LedSeg_1 = 7'b1011110;
-		5'hE: LedSeg_1 = 7'b1111001;
-		5'hF: LedSeg_1 = 7'b1110001;
-/*
-		//Special characters
-		5'h10: LedSeg_1 = 7'b0000000;// ' ' blank
-		5'h11: LedSeg_1 = 7'b1110100;// 'h'
-		5'h12: LedSeg_1 = 7'b1110110;// 'H'
-		5'h13: LedSeg_1 = 7'b0111000;// 'L'
-		5'h14: LedSeg_1 = 7'b1110011;// 'P'
-		5'h15: LedSeg_1 = 7'b1111000;// 't'
-		5'h16: LedSeg_1 = 7'b0011100;// 'u'
-		5'h17: LedSeg_1 = 7'b1101110;// 'y'
-		5'h18: LedSeg_1 = 7'b1110000;// 'r'
-		5'h19: LedSeg_1 = 7'b1000000;// '-'
-		5'h1A: LedSeg_1 = 7'b0111110;// 'U'	
-*/		
+		5'h0: LedSeg_1 = ~7'b0111111;
+		5'h1: LedSeg_1 = ~7'b0000110;
+		5'h2: LedSeg_1 = ~7'b1011011;
+		5'h3: LedSeg_1 = ~7'b1001111;
+		5'h4: LedSeg_1 = ~7'b1100110;
+		5'h5: LedSeg_1 = ~7'b1101101;
+		5'h6: LedSeg_1 = ~7'b1111101;
+		5'h7: LedSeg_1 = ~7'b0000111;
+		5'h8: LedSeg_1 = ~7'b1111111;
+		5'h9: LedSeg_1 = ~7'b1101111;
+		5'hA: LedSeg_1 = ~7'b1110111;
+		5'hB: LedSeg_1 = ~7'b1111100;
+		5'hC: LedSeg_1 = ~7'b0111001;
+		5'hD: LedSeg_1 = ~7'b1011110;
+		5'hE: LedSeg_1 = ~7'b1111001;
+		5'hF: LedSeg_1 = ~7'b1110001;
+//		default: LedSeg_1 = 7'b0111111;
     endcase
 end
 
 always @(posedge lclk) begin
     //Decode the data
     case(port_reg[7:4])
-		5'h0: LedSeg_2 = 7'b0111111;
-		5'h1: LedSeg_2 = 7'b0000110;
-		5'h2: LedSeg_2 = 7'b1011011;
-		5'h3: LedSeg_2 = 7'b1001111;
-		5'h4: LedSeg_2 = 7'b1100110;
-		5'h5: LedSeg_2 = 7'b1101101;
-		5'h6: LedSeg_2 = 7'b1111101;
-		5'h7: LedSeg_2 = 7'b0000111;
-		5'h8: LedSeg_2 = 7'b1111111;
-		5'h9: LedSeg_2 = 7'b1101111;
-		5'hA: LedSeg_2 = 7'b1110111;
-		5'hB: LedSeg_2 = 7'b1111100;
-		5'hC: LedSeg_2 = 7'b0111001;
-		5'hD: LedSeg_2 = 7'b1011110;
-		5'hE: LedSeg_2 = 7'b1111001;
-		5'hF: LedSeg_2 = 7'b1110001;
+
+		5'h0: LedSeg_2 = ~7'b0111111;
+		5'h1: LedSeg_2 = ~7'b0000110;
+		5'h2: LedSeg_2 = ~7'b1011011;
+		5'h3: LedSeg_2 = ~7'b1001111;
+		5'h4: LedSeg_2 = ~7'b1100110;
+		5'h5: LedSeg_2 = ~7'b1101101;
+		5'h6: LedSeg_2 = ~7'b1111101;
+		5'h7: LedSeg_2 = ~7'b0000111;
+		5'h8: LedSeg_2 = ~7'b1111111;
+		5'h9: LedSeg_2 = ~7'b1101111;
+		5'hA: LedSeg_2 = ~7'b1110111;
+		5'hB: LedSeg_2 = ~7'b1111100;
+		5'hC: LedSeg_2 = ~7'b0111001;
+		5'hD: LedSeg_2 = ~7'b1011110;
+		5'hE: LedSeg_2 = ~7'b1111001;
+		5'hF: LedSeg_2 = ~7'b1110001;
+//		default: LedSeg_2 = 7'b0000000;
 /*
 		//Special characters
 		5'h10: LedSeg_2 = 7'b0000000;// ' ' blank

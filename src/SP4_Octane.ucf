@@ -68,14 +68,6 @@ NET "LPC_FRAME_L" LOC = "P20"  	    ;
 NET "FPGA_LPC_RST_L" LOC = "P19"    ;
 NET "FPGA_LPC_CLK" LOC = "P17"      ;
 
-NET "LED_SEG_1<0>" LOC = "P42"		;
-NET "LED_SEG_1<1>" LOC = "P43"		;
-NET "LED_SEG_1<2>" LOC = "P44"		;
-NET "LED_SEG_1<3>" LOC = "P45"		;
-NET "LED_SEG_1<4>" LOC = "P46"		;
-NET "LED_SEG_1<5>" LOC = "P47"		;
-NET "LED_SEG_1<6>" LOC = "P48"		;
-
 NET "LED_SEG_2<0>" LOC = "P49"		;
 NET "LED_SEG_2<1>" LOC = "P50"		;
 NET "LED_SEG_2<2>" LOC = "P51"		;
@@ -83,6 +75,14 @@ NET "LED_SEG_2<3>" LOC = "P52"		;
 NET "LED_SEG_2<4>" LOC = "P56"		;
 NET "LED_SEG_2<5>" LOC = "P57"		;
 NET "LED_SEG_2<6>" LOC = "P58"		;
+
+NET "LED_SEG_1<0>" LOC = "P59"		;
+NET "LED_SEG_1<1>" LOC = "P60"		;
+NET "LED_SEG_1<2>" LOC = "P61"		;
+NET "LED_SEG_1<3>" LOC = "P62"		;
+NET "LED_SEG_1<4>" LOC = "P63"		;
+NET "LED_SEG_1<5>" LOC = "P64"		;
+NET "LED_SEG_1<6>" LOC = "P1"		;
 #
 #
 #NET "LED_SEG_3<0>" LOC = "P59"		;
