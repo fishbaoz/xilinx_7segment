@@ -1,0 +1,8 @@
+INTSTYLE=impact
+INFILE=D:\document\VHDL\xc_7segment\impact.xsl
+OUTFILE=D:\document\VHDL\xc_7segment\impact.xsl
+FAMILY=Single
+PART=Single
+WORKINGDIR=D:\document\VHDL\xc_7segment
+LICENSE=iMPACT
+USER_INFO=iMPACT
