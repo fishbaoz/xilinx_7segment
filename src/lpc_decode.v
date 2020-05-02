@@ -182,18 +182,19 @@ end
 	//reg [31:0] port_reg;
 	reg [2:0] cmd_reg;
 	reg lad_oe_reg;
-	reg [31:0] address_reg;
+	//reg [31:0] address_reg;
+	reg[15:0] address_reg_w;
 	reg [4:0] state_lpc;
 	reg [3:0] start_reg;
 //	reg [7:0] lad_out_mux;
 	reg [3:0]  lad_in;
-	reg [3:0]  lad_out;
+//	reg [3:0]  lad_out;
 	
 //	wire memr = 1'b0;
    wire iow = ~cmd_reg[2] & ~cmd_reg[1] & cmd_reg[0];
 	wire lad_oe = lad_oe_reg & lframe;
-	wire iow_hit = (address_reg[31:20] == 12'h008);
-	assign lad = lad_oe ? lad_out : 4'hz;
+	wire iow_hit = (address_reg_w[15:4] == 12'h008);
+//	assign lad = lad_oe ? lad_out : 4'hz;
 //	wire memr_hit = 1'b0;
 	
 	always @(lframe,lrst,lad)
@@ -201,38 +202,38 @@ end
 		lad_in = lad;
 	end
 	
-	parameter [4:0] idle = 5'h00;
+	parameter [4:0] idle = 4'h00;
 	parameter [4:0] command = 5'h01;
-	parameter [4:0] addr7 = 5'h02;
-	parameter [4:0] addr6 = 5'h03;
-	parameter [4:0] addr5 = 5'h04;
-	parameter [4:0] addr4 = 5'h05;
-	parameter [4:0] addr3 = 5'h06;
-	parameter [4:0] addr2 = 5'h07;
-	parameter [4:0] addr1 = 5'h08;
-	parameter [4:0] addr0 = 5'h09;
+	parameter [4:0] addr7 = 4'h02;
+	parameter [4:0] addr6 = 4'h03;
+	parameter [4:0] addr5 = 4'h04;
+	parameter [4:0] addr4 = 4'h05;
+//	parameter [4:0] addr3 = 5'h06;
+//	parameter [4:0] addr2 = 5'h07;
+//	parameter [4:0] addr1 = 5'h08;
+//	parameter [4:0] addr0 = 5'h09;
 //	parameter [4:0] memr_pre_tar0 = 5'h0A;
 //	parameter [4:0] memr_sync0 = 5'h0B;
 //	parameter [4:0] memr_data0 = 5'h0C;
 //	parameter [4:0] memr_data1 = 5'h0D;
-	parameter [4:0] iow_pre_tar0 = 5'h0E;
-	parameter [4:0] iow_pre_tar1 = 5'h15;
-	parameter [4:0] iow_sync0 = 5'h0F;
-	parameter [4:0] iow_data0 = 5'h10;
-	parameter [4:0] iow_data1 = 5'h11;
-	parameter [4:0] post_tar0 = 5'h12;
-	parameter [4:0] post_tar1 = 5'h13;
-	parameter [4:0] abort = 5'h14;
+	parameter [4:0] iow_pre_tar0 = 4'h0E;
+	parameter [4:0] iow_pre_tar1 = 4'h6;
+	parameter [4:0] iow_sync0 = 4'h0F;
+	parameter [4:0] iow_data0 = 4'h7;
+	parameter [4:0] iow_data1 = 4'h8;
+	parameter [4:0] post_tar0 = 4'h9;
+	parameter [4:0] post_tar1 = 4'hA;
+	parameter [4:0] abort = 4'hB;
 
 	always @(posedge lclk or negedge lrst) 
    begin
 		if (~lrst) 
 		begin
    		state_lpc <=  idle;
-		   address_reg <=  32'h00000000;
+		   address_reg_w <=  16'h00000000;
 		   start_reg <=  4'h0;
 		   cmd_reg <=  3'b000;
-	      lad_out <=  4'h0;
+//	      lad_out <=  4'h0;
 	      lad_oe_reg <=  1'b0;
 	      port_reg <=  16'h0000;  
    	end
@@ -274,7 +275,7 @@ end
 
 	   	   addr7: 
 				begin
-		      	address_reg[31:28] <=  lad_in;
+		      	address_reg_w[15:12] <=  lad_in;
 	   	     	if (~lframe) 
 					begin
 	         		state_lpc <=  abort;
@@ -287,7 +288,7 @@ end
         
 			  	addr6: 
 			  	begin
-      	  		address_reg[27:24] <=  lad_in;
+      	  		address_reg_w[11:8] <=  lad_in;
          	 	if (~lframe) 
 					begin
 	          		state_lpc <=  abort;
@@ -300,7 +301,7 @@ end
         
 				addr5: 
 			 	begin
-      	  		address_reg[23:20] <= lad_in;
+      	  		address_reg_w[7:4] <= lad_in;
 	      	  	if (~lframe) 
 					begin
 	          		state_lpc <=  abort;
@@ -313,7 +314,7 @@ end
 	      
 				addr4: 
 				begin
-					address_reg[19:16] <= lad_in;
+					address_reg_w[3:0] <= lad_in;
 	      	  	if (~lframe) 
 			  		begin
 						state_lpc <=  abort;
@@ -324,10 +325,10 @@ end
 	          	end
    	       	else 
 					begin
-	      	    	state_lpc <=  addr3;
+	      	    	state_lpc <=  abort;
           		end
         		end
-        
+/*
 			  	addr3: 
 			  	begin
 					address_reg[15:12] <=  lad_in;
@@ -383,7 +384,7 @@ end
 		         	state_lpc <= idle;
 		        	end
   	      	end
-	      
+*/      
 //				memr_pre_tar0: 
 //				begin
 //	  	       	if (~lframe) 
@@ -448,9 +449,9 @@ end
 					begin
 	         	 	state_lpc <= abort;
  	         	end
-   	       	else if (address_reg[31:20] == 12'h008) 
+   	       	else if (address_reg_w[15:4] == 12'h008) 
 					begin
-	      	    	case (address_reg[19:16])
+	      	    	case (address_reg_w[3:0])
 	              		4'h0: port_reg[3:0] <= lad_in;
 							default: port_reg[11:8] <= lad_in; //4'h1:
       	      	  //	4'h2: port_reg[19:16] <= lad_in;
@@ -472,7 +473,7 @@ end
   		        	end
 	          	else 
 					begin
-	      	    	case (address_reg[19:16])
+	      	    	case (address_reg_w[3:0])
 						4'h0: port_reg[7:4]   <= lad_in;
 						default: port_reg[15:12] <= lad_in; //4'h1:
             	//	  	4'h2: port_reg[23:20] <= lad_in;
@@ -509,7 +510,7 @@ end
 				iow_sync0: 
 				begin
 	  	        	lad_oe_reg <=  1'b1;
- 	         	lad_out <= 4'h0;
+ 	         	//lad_out <= 4'h0;
 	          	if (~lframe)
 					begin
 		          	state_lpc <=  abort;
@@ -522,7 +523,7 @@ end
         
 		  		post_tar0: 
 				begin
-       	   	lad_out <=  4'hF;
+       	   	//lad_out <=  4'hF;
        	   	if (~lframe) 
 					begin
 	   	      	state_lpc <=  abort;

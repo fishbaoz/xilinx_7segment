@@ -74,7 +74,7 @@ module leds_7seg_controller (
   input IntClk,
 //  input Reset,
 
-  input [15:0]  data,	
+  input [15:0]  data,
   
   // LED Outputs
   output reg [6:0] LedSeg_1,
@@ -90,6 +90,26 @@ module leds_7seg_controller (
 );
 
 //assign LedSeg_4 = 0;
+//reg [3:0] onedata;
+//reg [15:0] times;
+
+//initial times = 0;
+
+//always @(posedge IntClk) begin
+//	times = times + 16'b1;
+//	if (times == 40000)
+//		times = 16'b0;
+//end
+
+//always @(posedge IntClk) begin
+//	if (times > 20000) begin
+// onedata <= data[3:0];
+//	end
+//	else
+//	begin
+//		onedata = data[7:4];
+//	end
+//end
 
 always @(posedge IntClk) begin
     //Decode the data
@@ -133,7 +153,7 @@ always @(posedge IntClk) begin
 		4'hF: LedSeg_2 = ~7'b1110001;
     endcase
 end
-/*
+/////*
 always @(posedge IntClk) begin
     //Decode the data
     case(data[11:8])  //synthesis parallel_case
@@ -156,8 +176,8 @@ always @(posedge IntClk) begin
 //		default: LedSeg_3 = ~7'b0111111;
     endcase
 end
-*/
-/*
+//*/
+
 always @(posedge IntClk) begin
     //Decode the data
     case(data[15:12])  //synthesis parallel_case
@@ -180,5 +200,5 @@ always @(posedge IntClk) begin
 //		default: LedSeg_3 = ~7'b0111111;
     endcase
 end
-*/
+
 endmodule
