@@ -1,0 +1,20 @@
+1. Resolve ISE crash on Windows 10.
+cd D:\Xilinx\14.7\ISE_DS\ISE\lib\nt64\
+mv libPortability.dll libPortability.dll.orig
+mv libPortabilityNOSH.dll libPortability.dll
+
+
+cd D:\Xilinx\14.7\ISE_DS\common\lib\nt64
+mv libPortability.dll libPortability.dll.orig
+cp ..\..\..\ISE\lib\nt64\libPortabilityNOSH.dll libPortability.dll
+
+
+2. 
+impact -batch  filename.cmd
+>setmode -bscan
+>setCable -p auto
+>addDevice -p 1 -file a.jed
+>erase -o -p 1
+>blankCheck -p 1
+>program -v -p 1
+>quit
