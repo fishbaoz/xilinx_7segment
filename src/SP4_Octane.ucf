@@ -100,24 +100,6 @@ NET "LED_SEG_4<4>" LOC = "P46"		;
 NET "LED_SEG_4<5>" LOC = "P47"		;
 NET "LED_SEG_4<6>" LOC = "P48"		;
 
-#
-#
-#NET "LED_SEG_3<0>" LOC = "P59"		;
-#NET "LED_SEG_3<1>" LOC = "P60"		;
-#NET "LED_SEG_3<2>" LOC = "P61"		;
-#NET "LED_SEG_3<3>" LOC = "P62"		;
-#NET "LED_SEG_3<4>" LOC = "P63"		;
-#NET "LED_SEG_3<5>" LOC = "P64"		;
-#NET "LED_SEG_3<6>" LOC = "P1"		;
-#
-#NET "LED_SEG_4<0>" LOC = "P2"		;
-#NET "LED_SEG_4<1>" LOC = "P4"		;
-#NET "LED_SEG_4<2>" LOC = "P5"		;
-#NET "LED_SEG_4<3>" LOC = "P6"		;
-#NET "LED_SEG_4<4>" LOC = "P7"		;
-#NET "LED_SEG_4<5>" LOC = "P8"		;
-#NET "LED_SEG_4<6>" LOC = "P9"		;
-#
 #NET "LED_DP_1" LOC = "P33"		;
 #NET "LED_DP_2" LOC = "P34"		;
 #NET "LED_DP_3" LOC = "P35"		;

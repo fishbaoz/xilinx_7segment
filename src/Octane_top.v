@@ -65,7 +65,12 @@ module SP4_Octane(
 	output wire [6:0] LED_SEG_3,
 	output wire [6:0] LED_SEG_4,
 
-	inout  [3:0] LPC_LAD ,
+//	output LED_DP_1,
+//	output LED_DP_2,
+//	output LED_DP_3,
+//	output LED_DP_4,
+
+	input  [3:0] LPC_LAD ,
 	input  LPC_FRAME_L ,
 	input  FPGA_LPC_RST_L ,
 	input  FPGA_LPC_CLK
@@ -77,6 +82,10 @@ module SP4_Octane(
 **************************************************************/
 
 wire [15:0] lpc_port_reg;
+//assign LED_DP_1 = 1'b1;
+//assign LED_DP_2 = 1'b1;
+//assign LED_DP_3 = 1'b1;
+//assign LED_DP_4 = 1'b1;
 
 leds_7seg_controller leds_7seg_controller_inst(
 //  .debug			(),
@@ -87,7 +96,7 @@ leds_7seg_controller leds_7seg_controller_inst(
   .LedSeg_1		(LED_SEG_1),
   .LedSeg_2		(LED_SEG_2),
   .LedSeg_3		(LED_SEG_3),
-  .LedSeg_4		(LED_SEG_4)  
+  .LedSeg_4		(LED_SEG_4)
 //  .LedSeg_DP_1	(LED_DP_1),
 //  .LedSeg_DP_2	(LED_DP_2),
 //  .LedSeg_DP_3	(LED_DP_3),

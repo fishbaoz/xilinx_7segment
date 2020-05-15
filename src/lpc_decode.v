@@ -63,125 +63,13 @@ module lpc_decode(
 	input lclk,
 	input lrst,
 	input lframe,
-	inout [3:0] lad,
+	input [3:0] lad,
 	//lpc decode outputs
 	output reg [15:0]port_reg
 //  input IntClk,
-
-//  output reg [6:0] LedSeg_2,
-//  output reg [6:0] LedSeg_3,
-//  output reg [6:0] LedSeg_4
-// output	  LedSeg_DP_1,
-// output	  LedSeg_DP_2,
-// output	  LedSeg_DP_3,
-// output	  LedSeg_DP_4
-//  output reg [6:0] LedSeg_1
-	//lpc decode inouts
-
 );
-//	reg [31:0]port_reg;
-/*
-always @(posedge lclk) begin
-    //Decode the data
-    case(port_reg[3:0])
-		5'h0: LedSeg_1 = ~7'b0111111;
-		5'h1: LedSeg_1 = ~7'b0000110;
-		5'h2: LedSeg_1 = ~7'b1011011;
-		5'h3: LedSeg_1 = ~7'b1001111;
-		5'h4: LedSeg_1 = ~7'b1100110;
-		5'h5: LedSeg_1 = ~7'b1101101;
-		5'h6: LedSeg_1 = ~7'b1111101;
-		5'h7: LedSeg_1 = ~7'b0000111;
-		5'h8: LedSeg_1 = ~7'b1111111;
-		5'h9: LedSeg_1 = ~7'b1101111;
-		5'hA: LedSeg_1 = ~7'b1110111;
-		5'hB: LedSeg_1 = ~7'b1111100;
-		5'hC: LedSeg_1 = ~7'b0111001;
-		5'hD: LedSeg_1 = ~7'b1011110;
-		5'hE: LedSeg_1 = ~7'b1111001;
-		5'hF: LedSeg_1 = ~7'b1110001;
-//		default: LedSeg_1 = 7'b0111111;
-    endcase
-end
-
-always @(posedge lclk) begin
-    //Decode the data
-    case(port_reg[7:4])
-
-		5'h0: LedSeg_2 = ~7'b0111111;
-		5'h1: LedSeg_2 = ~7'b0000110;
-		5'h2: LedSeg_2 = ~7'b1011011;
-		5'h3: LedSeg_2 = ~7'b1001111;
-		5'h4: LedSeg_2 = ~7'b1100110;
-		5'h5: LedSeg_2 = ~7'b1101101;
-		5'h6: LedSeg_2 = ~7'b1111101;
-		5'h7: LedSeg_2 = ~7'b0000111;
-		5'h8: LedSeg_2 = ~7'b1111111;
-		5'h9: LedSeg_2 = ~7'b1101111;
-		5'hA: LedSeg_2 = ~7'b1110111;
-		5'hB: LedSeg_2 = ~7'b1111100;
-		5'hC: LedSeg_2 = ~7'b0111001;
-		5'hD: LedSeg_2 = ~7'b1011110;
-		5'hE: LedSeg_2 = ~7'b1111001;
-		5'hF: LedSeg_2 = ~7'b1110001;
-//		default: LedSeg_2 = 7'b0000000;
-
-		endcase
-end
-*/	
-/*
-	always @(posedge lclk) begin
-    //Decode the data
-    case(port_reg[11:8])
-
-		5'h0: LedSeg_3 = ~7'b0111111;
-		5'h1: LedSeg_3 = ~7'b0000110;
-		5'h2: LedSeg_3 = ~7'b1011011;
-		5'h3: LedSeg_3 = ~7'b1001111;
-		5'h4: LedSeg_3 = ~7'b1100110;
-		5'h5: LedSeg_3 = ~7'b1101101;
-		5'h6: LedSeg_3 = ~7'b1111101;
-		5'h7: LedSeg_3 = ~7'b0000111;
-		5'h8: LedSeg_3 = ~7'b1111111;
-		5'h9: LedSeg_3 = ~7'b1101111;
-		5'hA: LedSeg_3 = ~7'b1110111;
-		5'hB: LedSeg_3 = ~7'b1111100;
-		5'hC: LedSeg_3 = ~7'b0111001;
-		5'hD: LedSeg_3 = ~7'b1011110;
-		5'hE: LedSeg_3 = ~7'b1111001;
-		5'hF: LedSeg_3 = ~7'b1110001;
-//		default: LedSeg_2 = 7'b0000000;
-
-		endcase
-end
-		always @(posedge lclk) begin
-    //Decode the data
-    case(port_reg[15:12])
-
-		5'h0: LedSeg_4 = ~7'b0111111;
-		5'h1: LedSeg_4 = ~7'b0000110;
-		5'h2: LedSeg_4 = ~7'b1011011;
-		5'h3: LedSeg_4 = ~7'b1001111;
-		5'h4: LedSeg_4 = ~7'b1100110;
-		5'h5: LedSeg_4 = ~7'b1101101;
-		5'h6: LedSeg_4 = ~7'b1111101;
-		5'h7: LedSeg_4 = ~7'b0000111;
-		5'h8: LedSeg_4 = ~7'b1111111;
-		5'h9: LedSeg_4 = ~7'b1101111;
-		5'hA: LedSeg_4 = ~7'b1110111;
-		5'hB: LedSeg_4 = ~7'b1111100;
-		5'hC: LedSeg_4 = ~7'b0111001;
-		5'hD: LedSeg_4 = ~7'b1011110;
-		5'hE: LedSeg_4 = ~7'b1111001;
-		5'hF: LedSeg_4 = ~7'b1110001;
-//		default: LedSeg_2 = 7'b0000000;
-
-		endcase
-end
-*/
-	//reg [31:0] port_reg;
 	reg [2:0] cmd_reg;
-	reg lad_oe_reg;
+//	reg lad_oe_reg;
 	//reg [31:0] address_reg;
 	reg[15:0] address_reg_w;
 	reg [4:0] state_lpc;
@@ -192,8 +80,8 @@ end
 	
 //	wire memr = 1'b0;
    wire iow = ~cmd_reg[2] & ~cmd_reg[1] & cmd_reg[0];
-	wire lad_oe = lad_oe_reg & lframe;
-	wire iow_hit = (address_reg_w[15:4] == 12'h008);
+//	wire lad_oe = lad_oe_reg & lframe;
+//	wire iow_hit = (address_reg_w[15:4] == 12'h008);
 //	assign lad = lad_oe ? lad_out : 4'hz;
 //	wire memr_hit = 1'b0;
 	
@@ -202,23 +90,23 @@ end
 		lad_in = lad;
 	end
 	
-	parameter [4:0] idle = 4'h00;
-	parameter [4:0] command = 5'h01;
-	parameter [4:0] addr7 = 4'h02;
-	parameter [4:0] addr6 = 4'h03;
-	parameter [4:0] addr5 = 4'h04;
-	parameter [4:0] addr4 = 4'h05;
-//	parameter [4:0] addr3 = 5'h06;
-//	parameter [4:0] addr2 = 5'h07;
-//	parameter [4:0] addr1 = 5'h08;
-//	parameter [4:0] addr0 = 5'h09;
-//	parameter [4:0] memr_pre_tar0 = 5'h0A;
-//	parameter [4:0] memr_sync0 = 5'h0B;
-//	parameter [4:0] memr_data0 = 5'h0C;
-//	parameter [4:0] memr_data1 = 5'h0D;
-	parameter [4:0] iow_pre_tar0 = 4'h0E;
+	parameter [4:0] idle = 4'h0;
+	parameter [4:0] command = 5'h1;
+	parameter [4:0] addr7 = 4'h2;
+	parameter [4:0] addr6 = 4'h3;
+	parameter [4:0] addr5 = 4'h4;
+	parameter [4:0] addr4 = 4'h5;
+//	parameter [4:0] addr3 = 5'h6;
+//	parameter [4:0] addr2 = 5'h7;
+//	parameter [4:0] addr1 = 5'h8;
+//	parameter [4:0] addr0 = 5'h9;
+//	parameter [4:0] memr_pre_tar0 = 5'hA;
+//	parameter [4:0] memr_sync0 = 5'hB;
+//	parameter [4:0] memr_data0 = 5'hC;
+//	parameter [4:0] memr_data1 = 5'hD;
+	parameter [4:0] iow_pre_tar0 = 4'hE;
 	parameter [4:0] iow_pre_tar1 = 4'h6;
-	parameter [4:0] iow_sync0 = 4'h0F;
+	parameter [4:0] iow_sync0 = 4'hF;
 	parameter [4:0] iow_data0 = 4'h7;
 	parameter [4:0] iow_data1 = 4'h8;
 	parameter [4:0] post_tar0 = 4'h9;
@@ -230,11 +118,11 @@ end
 		if (~lrst) 
 		begin
    		state_lpc <=  idle;
-		   address_reg_w <=  16'h00000000;
+		   address_reg_w <=  16'h0000;
 		   start_reg <=  4'h0;
 		   cmd_reg <=  3'b000;
 //	      lad_out <=  4'h0;
-	      lad_oe_reg <=  1'b0;
+//	      lad_oe_reg <=  1'b0;
 	      port_reg <=  16'h0000;  
    	end
   	 	else 
@@ -242,7 +130,7 @@ end
 			case (state_lpc)
 				idle: 
 				begin
-				lad_oe_reg <= 1'b0;
+//				lad_oe_reg <= 1'b0;
 			  	
 					if (~lframe) 
 					  begin
@@ -509,7 +397,7 @@ end
 				
 				iow_sync0: 
 				begin
-	  	        	lad_oe_reg <=  1'b1;
+//	  	        	lad_oe_reg <=  1'b1;
  	         	//lad_out <= 4'h0;
 	          	if (~lframe)
 					begin
@@ -536,7 +424,7 @@ end
     	    
 			  	post_tar1: 
 				begin
-    		     	lad_oe_reg <=  1'b0;
+               //lad_oe_reg <=  1'b0;
    	       	if (~lframe) 
 				 	begin
 	   	    		state_lpc <= abort;
@@ -549,7 +437,7 @@ end
 	     
 		   	abort: 
 				begin
-					lad_oe_reg <=  1'b0;
+					//lad_oe_reg <=  1'b0;
       	    	if (~lframe) 
 					begin
 						state_lpc <=  abort;

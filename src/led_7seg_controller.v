@@ -81,10 +81,10 @@ module leds_7seg_controller (
   output reg [6:0] LedSeg_2,
   output reg [6:0] LedSeg_3,
   output reg [6:0] LedSeg_4
-//  output	  LedSeg_DP_1,
-//  output	  LedSeg_DP_2,
-//  output	  LedSeg_DP_3,
-//  output	  LedSeg_DP_4
+  //output	  LedSeg_DP_1,
+  //output	  LedSeg_DP_2,
+  //output	  LedSeg_DP_3,
+  //output	  LedSeg_DP_4
 //  output wire [3:0] LED_DIG_SEL
 
 );
@@ -110,6 +110,11 @@ module leds_7seg_controller (
 //		onedata = data[7:4];
 //	end
 //end
+
+//assign LedSeg_DP_1 = 1'b1;
+//assign LedSeg_DP_2 = 1b1;
+//assign LedSeg_DP_3 = 1b1;
+//assign LedSeg_DP_4 = 1b1;
 
 always @(posedge IntClk) begin
     //Decode the data
